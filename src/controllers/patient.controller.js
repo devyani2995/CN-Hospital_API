@@ -80,6 +80,12 @@ export const createReport = async (req, res) => {
 export const patientReports = async (req, res) => {
     const { id } = req.params; // Extract patient ID from request parameters
     try {
+        const patient = await patientModel.findById(id); // Find patient by ID
+
+        // If patient does not exist, send error response
+        if (!patient) {
+            return res.status(422).send({ message: "Patient does not exist" });
+        }
         // Find all reports for the patient, populate the doctor information, and sort by date
         const reports = await reportModel.find({ patient: id }).populate('createdByDoctor').sort('date');
 
