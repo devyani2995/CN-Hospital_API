@@ -7,7 +7,7 @@ const patientRouter = express.Router();
 
 // Route to handle patient registration, protected by JWT authentication
 patientRouter.post('/register', passport.authenticate('jwt',{session:false}),patientRegister);
-// Route for screating a report for a patient, protected by JWT authentication
+// Route for creating a report for a patient, protected by JWT authentication
 patientRouter.post('/:id/create_report', passport.authenticate('jwt',{session:false}),createReport);
 // Route to get all the reports of a patient, protected by JWT authentication
 patientRouter.get('/:id/all_reports',passport.authenticate('jwt',{session:false}),patientReports)
